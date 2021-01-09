@@ -1,0 +1,112 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'androidx.navigation.safeargs'
+    id 'kotlin-kapt'
+}
+def STRING = 'String'
+def BUILD_TIME = 'BUILD_TIME'
+
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.master.yahooweather"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField STRING, BUILD_TIME, "\"${rootProject.ext.buildTime}\""
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            zipAlignEnabled true
+//            shrinkResource true
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            ext.enableCrashlytics = false
+            testCoverageEnabled true
+        }
+    }
+    buildFeatures {
+        viewBinding true
+    }
+    dataBinding {
+        enabled = true
+    }
+
+    testOptions.unitTests {
+        includeAndroidResources = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    //support lib
+    implementation rootProject.ext.constraintlayout
+    implementation rootProject.ext.appCompat
+    implementation rootProject.ext.materialDesign
+    implementation rootProject.ext.recyclerView
+    implementation rootProject.ext.cardView
+    implementation rootProject.ext.coreKtx
+    implementation rootProject.ext.threetenabp
+    implementation rootProject.ext.timber
+    implementation rootProject.ext.navigationFragment
+    implementation rootProject.ext.navigationUI
+    implementation rootProject.ext.dagger
+    implementation rootProject.ext.daggerSupport
+    kapt rootProject.ext.daggerApt
+    kapt rootProject.ext.daggerAnnotation
+    implementation rootProject.ext.rxJava
+    implementation rootProject.ext.rxKotlin
+    implementation rootProject.ext.rxAndroid
+    implementation rootProject.ext.rxAnimations
+    implementation rootProject.ext.retrofit
+    implementation rootProject.ext.okHttp
+    implementation rootProject.ext.moshi
+    implementation rootProject.ext.moshiConverter
+    implementation rootProject.ext.moshiKotlin
+    kapt rootProject.ext.moshiKapt
+    implementation rootProject.ext.rxJavaAdapter
+    implementation rootProject.ext.picasso
+    implementation rootProject.ext.shadowView
+    implementation rootProject.ext.lifecycleExt
+    kapt rootProject.ext.lifecycleAnnotation
+    implementation rootProject.ext.liveDataKtx
+    implementation rootProject.ext.lifecycleViewModelKtx
+    implementation rootProject.ext.roomRuntime
+    kapt rootProject.ext.roomCompiler
+    implementation rootProject.ext.stethoCore
+    implementation rootProject.ext.stethoOkHttp
+    implementation rootProject.ext.stethoUrlConnection
+    implementation rootProject.ext.oauth
+    implementation rootProject.ext.kotlinStdliJdk8
+
+    testImplementation rootProject.ext.junit
+    testImplementation rootProject.ext.junitTestExt
+    androidTestImplementation rootProject.ext.androidxTestRunner
+    androidTestImplementation rootProject.ext.androidxTestRules
+    androidTestImplementation rootProject.ext.espressoCore
+    testImplementation rootProject.ext.truthExt
+    testImplementation rootProject.ext.truth
+    testImplementation rootProject.ext.mockK
+    testImplementation rootProject.ext.coreTesting
+    testImplementation rootProject.ext.robolectric
+}

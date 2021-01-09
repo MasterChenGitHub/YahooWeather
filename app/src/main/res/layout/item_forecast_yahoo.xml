@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.master.yahooweather.ui.dashboard.YahooForecastItemViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/rootView"
+        android:layout_width="match_parent"
+        android:layout_height="28dp"
+        android:background="@color/cardview_dark_background"
+        android:backgroundTint="@{viewModel.item.getColor()}"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:transitionName="@{String.format(@string/cardView, viewModel.item.getDay())}">
+
+        <TextView
+            android:id="@+id/textViewDayOfWeek"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="@{viewModel.item.getDay()}"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:transitionName="@{String.format(@string/dayOfWeek, viewModel.item.getDay())}"
+            tools:text="Monday" />
+
+
+        <ImageView
+            android:id="@+id/imageViewForecastIcon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:transitionName="@{String.format(@string/forecastIcon, viewModel.item.getDay())}"
+            app:setWeatherIconFromNet="@{viewModel.item.getConditionIcon()}"
+            tools:src="@drawable/ic_splash_big_cloud" />
+
+        <TextView
+            android:id="@+id/textViewLow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/textViewHigh"
+            android:text="@{viewModel.item.getLow()}"
+            android:textColor="@color/whiteWithHalfOpacity"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            tools:text="24°" />
+
+        <TextView
+            android:id="@+id/textViewHigh"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:text="@{viewModel.item.getHigh()}"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            tools:text="56°" />
+    </RelativeLayout>
+</layout>
