@@ -1,8 +1,7 @@
 package com.master.yahooweather.ui.dashboard
 
 import android.transition.TransitionInflater
-import androidx.core.app.ActivityCompat.postponeEnterTransition
-import androidx.core.app.ActivityCompat.startPostponedEnterTransition
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.master.yahooweather.R
 import com.master.yahooweather.base.BaseFragment
@@ -14,15 +13,19 @@ import com.master.yahooweather.domain.usecase.CurrentWeatherYahooUseCase
 import com.master.yahooweather.ui.MainActivity
 import com.master.yahooweather.utils.domain.extensions.observeWith
 import com.master.yahooweather.utils.extensions.isNetworkAvailable
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Created by MasterChen on 2020/12/29
  */
+@AndroidEntryPoint
 class YahooDashboardFragment : BaseFragment<YahooDashboardFragmentViewModel, FragmentDashboardYahooBinding>(
     R.layout.fragment_dashboard_yahoo, YahooDashboardFragmentViewModel::class.java), Injectable {
 
     override fun init() {
         super.init()
+        val viewModel: YahooDashboardFragmentViewModel by viewModels()
+        binding.viewModel=viewModel
         initForecastAdapter()
         sharedElementReturnTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
 

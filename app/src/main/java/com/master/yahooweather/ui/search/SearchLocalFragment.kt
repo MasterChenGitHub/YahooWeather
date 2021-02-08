@@ -4,6 +4,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.master.yahooweather.R
@@ -17,16 +18,24 @@ import com.master.yahooweather.ui.search.result.SearchLocalResultAdapter
 import com.master.yahooweather.utils.domain.extensions.observeWith
 import com.master.yahooweather.utils.domain.tryCatch
 import com.master.yahooweather.utils.extensions.hideKeyboard
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 /**
  * Created by MasterChen on 2020/12/29
  */
-class SearchLocalFragment : BaseFragment<SearchLocalViewModel, FragmentSearchLocalBinding>(R.layout.fragment_search_local, SearchLocalViewModel::class.java),
+@AndroidEntryPoint
+class SearchLocalFragment : BaseFragment<SearchLocalViewModel, FragmentSearchLocalBinding>(
+    R.layout.fragment_search_local,
+    SearchLocalViewModel::class.java
+),
     Injectable {
 
     override fun init() {
         super.init()
+
+        val viewModel: SearchLocalViewModel by viewModels()
+        binding.viewModel = viewModel
         initSearchResultsAdapter()
         initSearchView()
 
@@ -42,7 +51,12 @@ class SearchLocalFragment : BaseFragment<SearchLocalViewModel, FragmentSearchLoc
         val searchEditText: EditText = binding.searchView.findViewById(R.id.search_src_text)
         activity?.applicationContext?.let { ContextCompat.getColor(it, R.color.mainTextColor) }
             ?.let { searchEditText.setTextColor(it) }
-        activity?.applicationContext?.let { ContextCompat.getColor(it, android.R.color.darker_gray) }
+        activity?.applicationContext?.let {
+            ContextCompat.getColor(
+                it,
+                android.R.color.darker_gray
+            )
+        }
             ?.let { searchEditText.setHintTextColor(it) }
         binding.searchView.isActivated = true
         binding.searchView.setIconifiedByDefault(false)
@@ -66,9 +80,9 @@ class SearchLocalFragment : BaseFragment<SearchLocalViewModel, FragmentSearchLoc
 
     private fun searchByCityName(newText: String?) {
 
-        if (newText!=null&&newText.isNotEmpty() && newText.count() > 0) {
+        if (newText != null && newText.isNotEmpty() && newText.count() > 0) {
             binding.viewModel?.setSearchParams(SearchLocalCitiesUseCase.SearchCitiesParams(newText))
-        }else{
+        } else {
             initSearchResultsRecyclerView(Collections.emptyList())
         }
     }
@@ -92,10 +106,12 @@ class SearchLocalFragment : BaseFragment<SearchLocalViewModel, FragmentSearchLoc
         }
 
         binding.recyclerViewSearchResults.adapter = adapter
-        binding.recyclerViewSearchResults.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.recyclerViewSearchResults.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
     }
 
     private fun initSearchResultsRecyclerView(list: List<LocalCityEntity>) {
-        (binding.recyclerViewSearchResults.adapter as SearchLocalResultAdapter).submitList(list.distinctBy { it.allFirstPinyin }.sortedBy { it.firstPinyin })
+        (binding.recyclerViewSearchResults.adapter as SearchLocalResultAdapter).submitList(list.distinctBy { it.allFirstPinyin }
+            .sortedBy { it.firstPinyin })
     }
 }

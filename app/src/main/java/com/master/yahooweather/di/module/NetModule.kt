@@ -9,6 +9,8 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -22,7 +24,8 @@ import javax.inject.Singleton
  * Created by MasterChen on 2020/12/29
  */
 @Module
-class NetModule {
+@InstallIn(ApplicationComponent::class)
+object  NetModule {
     @Singleton
     @Provides
     @Named("cached")

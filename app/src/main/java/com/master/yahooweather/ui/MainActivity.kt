@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
+import androidx.activity.viewModels
 import androidx.core.view.GravityCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -19,20 +20,14 @@ import com.master.yahooweather.base.BaseActivity
 import com.master.yahooweather.databinding.ActivityMainBinding
 import com.master.yahooweather.utils.extensions.hide
 import com.master.yahooweather.utils.extensions.show
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasAndroidInjector
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
-class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>(MainActivityViewModel::class.java),
-    HasAndroidInjector, NavigationView.OnNavigationItemSelectedListener {
+@AndroidEntryPoint
+class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>(),
+  NavigationView.OnNavigationItemSelectedListener {
 
-    @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
-
-    override fun androidInjector(): AndroidInjector<Any> = dispatchingAndroidInjector
-
-    override fun initViewModel(viewModel: MainActivityViewModel) {
+    val viewModel: MainActivityViewModel by viewModels()
+    override fun initViewModel() {
         binding.viewModel = viewModel
     }
 

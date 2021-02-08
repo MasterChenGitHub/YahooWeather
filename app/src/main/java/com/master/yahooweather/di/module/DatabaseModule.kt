@@ -1,6 +1,6 @@
 package com.master.yahooweather.di.module
 
-import android.content.Context
+import android.app.Application
 import androidx.room.Room
 import com.master.yahooweather.db.CityDatabase
 import com.master.yahooweather.db.YahooWeatherDatabase
@@ -8,6 +8,8 @@ import com.master.yahooweather.db.dao.CitiesSearchDao
 import com.master.yahooweather.db.dao.YahooWeatherDao
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import javax.inject.Singleton
 
 /**
@@ -15,12 +17,13 @@ import javax.inject.Singleton
  */
 
 @Module
-class DatabaseModule {
+@InstallIn(ApplicationComponent::class)
+object DatabaseModule {
 
 
     @Singleton
     @Provides
-    fun getLocalCityDatabase(context: Context): CityDatabase {
+    fun getLocalCityDatabase(context: Application): CityDatabase {
         return Room.databaseBuilder(context, CityDatabase::class.java, "City-DB")
             .createFromAsset("databases/city.db")
             .build()
@@ -36,7 +39,7 @@ class DatabaseModule {
 
     @Singleton
     @Provides
-    fun getYahooWeatherDatabase(context: Context): YahooWeatherDatabase {
+    fun getYahooWeatherDatabase(context: Application): YahooWeatherDatabase {
         return Room.databaseBuilder(
             context,
             YahooWeatherDatabase::class.java, "WeatherYahoo-DB"

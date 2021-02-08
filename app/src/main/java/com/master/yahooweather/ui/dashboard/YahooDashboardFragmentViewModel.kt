@@ -1,6 +1,7 @@
 package com.master.yahooweather.ui.dashboard
 
 import android.content.SharedPreferences
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.switchMap
@@ -11,7 +12,7 @@ import javax.inject.Inject
 /**
  * Created by MasterChen on 2020/12/29
  */
-class YahooDashboardFragmentViewModel @Inject internal constructor(private val currentWeatherUseCase: CurrentWeatherYahooUseCase, var sharedPreferences: SharedPreferences) : BaseViewModel() {
+class YahooDashboardFragmentViewModel @ViewModelInject  constructor(private val currentWeatherUseCase: CurrentWeatherYahooUseCase, var sharedPreferences: SharedPreferences) : BaseViewModel() {
 
     private val _currentWeatherParams: MutableLiveData<CurrentWeatherYahooUseCase.CurrentWeatherParams> = MutableLiveData()
 

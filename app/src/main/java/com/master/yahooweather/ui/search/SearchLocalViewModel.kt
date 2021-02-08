@@ -2,6 +2,7 @@ package com.master.yahooweather.ui.search
 
 import android.content.SharedPreferences
 import android.util.Log
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.switchMap
@@ -16,7 +17,7 @@ import javax.inject.Inject
 /**
  * Created by MasterChen on 2020/12/29
  */
-class SearchLocalViewModel @Inject internal constructor(private val useCase: SearchLocalCitiesUseCase, private val pref: SharedPreferences) : BaseViewModel() {
+class SearchLocalViewModel @ViewModelInject internal constructor(private val useCase: SearchLocalCitiesUseCase, private val pref: SharedPreferences) : BaseViewModel() {
 
     private val _searchParams: MutableLiveData<SearchLocalCitiesUseCase.SearchCitiesParams> = MutableLiveData()
     fun getSearchViewState() = searchViewState

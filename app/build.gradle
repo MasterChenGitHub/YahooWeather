@@ -1,9 +1,10 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'kotlin-android-extensions'
     id 'androidx.navigation.safeargs'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-parcelize'
 }
 def STRING = 'String'
 def BUILD_TIME = 'BUILD_TIME'
@@ -70,10 +71,10 @@ dependencies {
     implementation rootProject.ext.timber
     implementation rootProject.ext.navigationFragment
     implementation rootProject.ext.navigationUI
-    implementation rootProject.ext.dagger
-    implementation rootProject.ext.daggerSupport
-    kapt rootProject.ext.daggerApt
-    kapt rootProject.ext.daggerAnnotation
+//    implementation rootProject.ext.dagger
+//    implementation rootProject.ext.daggerSupport
+//    kapt rootProject.ext.daggerApt
+//    kapt rootProject.ext.daggerAnnotation
     implementation rootProject.ext.rxJava
     implementation rootProject.ext.rxKotlin
     implementation rootProject.ext.rxAndroid
@@ -99,6 +100,12 @@ dependencies {
     implementation rootProject.ext.oauth
     implementation rootProject.ext.kotlinStdliJdk8
 
+    implementation rootProject.ext.hiltAndroid
+    kapt rootProject.ext.hintAndroidCompiler
+    implementation rootProject.ext.fragmentKtx
+    implementation rootProject.ext.hiltLifecycleViewmodel
+    kapt rootProject.ext.hiltCompiler
+
     testImplementation rootProject.ext.junit
     testImplementation rootProject.ext.junitTestExt
     androidTestImplementation rootProject.ext.androidxTestRunner
@@ -109,4 +116,10 @@ dependencies {
     testImplementation rootProject.ext.mockK
     testImplementation rootProject.ext.coreTesting
     testImplementation rootProject.ext.robolectric
+    testImplementation rootProject.ext.hintAndroidTesting
+    kaptAndroidTest rootProject.ext.hiltAndroidCompilerTest
+    kaptAndroidTest rootProject.ext.hiltCompilerTest
+
+
+
 }

@@ -4,22 +4,14 @@ import android.app.Application
 import android.os.Build
 import com.facebook.stetho.Stetho
 import com.jakewharton.threetenabp.AndroidThreeTen
-import com.master.yahooweather.di.AppInjector
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasAndroidInjector
+import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
-import javax.inject.Inject
 
 /**
  * Created by MasterChen on 2020/12/29
  */
-class WeatherApp : Application(), HasAndroidInjector {
-
-    @Inject
-    lateinit var androidInjector: DispatchingAndroidInjector<Any>
-
-    override fun androidInjector(): AndroidInjector<Any> = androidInjector
+@HiltAndroidApp
+class WeatherApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
@@ -29,7 +21,6 @@ class WeatherApp : Application(), HasAndroidInjector {
             Stetho.initializeWithDefaults(this)
         }
 
-        AppInjector.init(this)
         AndroidThreeTen.init(this)
     }
 

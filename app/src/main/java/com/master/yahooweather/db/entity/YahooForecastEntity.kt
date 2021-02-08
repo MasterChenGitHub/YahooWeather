@@ -4,8 +4,7 @@ import android.os.Parcelable
 import androidx.room.*
 import com.master.yahooweather.domain.model.YahooForecast
 import com.master.yahooweather.domain.model.YahooForecastResponse
-import kotlinx.android.parcel.Parcelize
-
+import kotlinx.parcelize.Parcelize
 /**
  * Created by MasterChen on 2020/12/29
  */

@@ -1,21 +1,25 @@
 package com.master.yahooweather.ui.splash
 
 import android.graphics.Color
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.master.yahooweather.R
 import com.master.yahooweather.base.BaseFragment
 import com.master.yahooweather.base.Constants
 import com.master.yahooweather.databinding.FragmentSplashBinding
 import com.master.yahooweather.di.Injectable
+import com.master.yahooweather.ui.search.SearchLocalViewModel
 import com.master.yahooweather.utils.extensions.hide
 import com.master.yahooweather.utils.extensions.show
 import com.mikhaellopez.rxanimation.*
+import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.disposables.CompositeDisposable
 import java.util.logging.Handler
 
 /**
  * Created by MasterChen on 2020/12/29
  */
+@AndroidEntryPoint
 class SplashFragment : BaseFragment<SplashFragmentViewModel, FragmentSplashBinding>(R.layout.fragment_splash, SplashFragmentViewModel::class.java),
     Injectable {
 
@@ -23,7 +27,8 @@ class SplashFragment : BaseFragment<SplashFragmentViewModel, FragmentSplashBindi
 
     override fun init() {
         super.init()
-
+        val viewModel: SplashFragmentViewModel by viewModels()
+        binding.viewModel=viewModel
         if (binding.viewModel?.sharedPreferences?.getString(Constants.CurrentCity.CITY_NAME, "").isNullOrEmpty()) {
             binding.buttonExplore.show()
             binding.viewModel?.navigateDashboard = false

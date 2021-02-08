@@ -11,16 +11,19 @@ import com.master.yahooweather.ui.search.result.SearchLocalResultItemViewModel
 import com.master.yahooweather.ui.splash.SplashFragmentViewModel
 import dagger.Binds
 import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
 import dagger.multibindings.IntoMap
 
 /**
  * Created by MasterChen on 2020/12/29
  */
 @Module
+@InstallIn(ActivityComponent::class)
 abstract class ViewModelModule {
-
-    @Binds
-    abstract fun bindViewModelFactory(viewModelFactory: ViewModelFactory): ViewModelProvider.Factory
+//
+//    @Binds
+//    abstract fun bindViewModelFactory(viewModelFactory: ViewModelFactory): ViewModelProvider.Factory
 
     @IntoMap
     @Binds

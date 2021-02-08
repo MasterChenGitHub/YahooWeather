@@ -8,6 +8,6 @@ import javax.inject.Inject
 /**
  * Created by MasterChen on 2020/12/29
  */
-class YahooForecastItemViewModel @Inject internal constructor() : BaseViewModel() {
+class YahooForecastItemViewModel @Inject  constructor() : BaseViewModel() {
     var item = ObservableField<YahooForecast>()
 }

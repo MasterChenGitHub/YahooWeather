@@ -10,7 +10,7 @@ import com.master.yahooweather.db.entity.codeConverter
 import com.master.yahooweather.db.entity.temperatureConverter
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
 import java.text.SimpleDateFormat
